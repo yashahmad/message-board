@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useMessageContext } from '../context/MessageContext';
 
 const PostMessage = () => {
     const [text, setText] = useState('');
+    const { dispatch } = useMessageContext();
     const apiUrl = process.env.REACT_APP_API_URL;
     const token = process.env.REACT_APP_AUTH_TOKEN;
 
@@ -16,7 +18,8 @@ const PostMessage = () => {
             body: JSON.stringify({ text })
         });
         const data = await response.json();
-
+        console.log(data);
+        dispatch({ type: 'ADD_MESSAGE', payload: data });
         setText('');
     }
 

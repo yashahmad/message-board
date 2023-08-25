@@ -1,28 +1,32 @@
-import React,{ useState, useEffect } from "react";
+import React,{ useEffect } from "react";
 import { useMessageContext } from "../context/MessageContext";
 
 const MessageList = () => {
     // const [messages, setMessages] = useState([]);
-    const { message, setMessage } = useMessageContext();
+    // const { message, setMessage } = useMessageContext();
+    const { state, dispatch } = useMessageContext();
+
     const apiUrl = process.env.REACT_APP_API_URL;
     const token = process.env.REACT_APP_AUTH_TOKEN;
 
-    const fetchMessages = async () => {
-        const response = await fetch(apiUrl,{
-            headers: {
-                'Authorization': token,
-            },
-        });
-        const data = await response.json();
-        setMessage(data);
-    };
     useEffect(() => {
+        const fetchMessages = async () => {
+            const response = await fetch(apiUrl,{
+                headers: {
+                    'Authorization': token,
+                },
+            });
+            const data = await response.json();
+            // setMessage(data);
+            dispatch({ type: 'SET_MESSAGE', payload: data });
+        };
         fetchMessages();
-    },[])
+        console.log(state.messages);
+    },[dispatch])
 
     return (
         <div>
-            {message.map(message => (
+            {state.messages.map(message => (
                 <div key={message.id}>
                     <Message data={message}/>
                 </div>
