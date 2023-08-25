@@ -23,8 +23,15 @@ const PostMessage = () => {
         setText('');
     }
 
-    const handleDeleteAllMessages = () => {
-        //
+    const handleDeleteAllMessages = async () => {
+        // await fetch(apiUrl, {
+        //     method: 'DELETE',
+        //     headers: {
+        //         'Authorization': token,
+        //     },
+        // });
+        // dispatch({ type: 'DELETE_ALL_MESSAGE' });
+        alert('API does not support all delete');
     }
 
     return (
