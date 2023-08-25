@@ -18,6 +18,11 @@ const messageReducer = (state, action) => {
         ...state,
         messages: action.payload,
       };
+    case 'DELETE_MESSAGE':
+      return {
+        ...state,
+        messages: state.messages.filter(message => message.id !== action.payload),
+      };
     default:
       return state;
   }
