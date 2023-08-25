@@ -27,7 +27,7 @@ const DeleteAlert = (props) => {
             style={{ color: '#dc3545' }}
         >
             <Modal.Body style={{ backgroundColor: '#f8d7da' }}>
-                <h4>Are you sure you want to delete this message ? {props.data}</h4>
+                <h4>Are you sure you want to delete this message ?</h4>
             </Modal.Body>
             <Modal.Footer style={{ backgroundColor: '#f8d7da' }}>
                 <Button variant="danger" onClick={() => handleDelete(props.data)}>Delete</Button>
