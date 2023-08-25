@@ -2,9 +2,22 @@ import React, { useState } from 'react';
 
 const PostMessage = () => {
     const [text, setText] = useState('');
+    const apiUrl = process.env.REACT_APP_API_URL;
+    const token = process.env.REACT_APP_AUTH_TOKEN;
 
-    const handlePost = () => {
-        //
+    const handlePost = async (e) => {
+        e.preventDefault();
+        const response = await fetch(apiUrl,{
+            method: 'POST',
+            headers: {
+                'Authorization': token,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ text })
+        });
+        const data = await response.json();
+
+        setText('');
     }
 
     const handleDeleteAllMessages = () => {
