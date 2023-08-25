@@ -1,7 +1,9 @@
 import React,{ useState, useEffect } from "react";
+import { useMessageContext } from "../context/MessageContext";
 
 const MessageList = () => {
-    const [messages, setMessages] = useState([]);
+    // const [messages, setMessages] = useState([]);
+    const { message, setMessage } = useMessageContext();
     const apiUrl = process.env.REACT_APP_API_URL;
     const token = process.env.REACT_APP_AUTH_TOKEN;
 
@@ -12,7 +14,7 @@ const MessageList = () => {
             },
         });
         const data = await response.json();
-        setMessages(data);
+        setMessage(data);
     };
     useEffect(() => {
         fetchMessages();
@@ -20,7 +22,7 @@ const MessageList = () => {
 
     return (
         <div>
-            {messages.map(message => (
+            {message.map(message => (
                 <div key={message.id}>
                     <Message data={message}/>
                 </div>
